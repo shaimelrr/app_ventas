@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->decimal('price',8,2);
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
+
+
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
