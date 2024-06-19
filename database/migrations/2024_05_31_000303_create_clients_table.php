@@ -16,12 +16,15 @@ return new class extends Migration
             $table->string('ci', 15);
             $table->string('name', 75);
             $table->date('birth_date');
-            $table->string('gender',15);
+            $table->string('gender', 15);
 
+            // Cambiar group_id para permitir valores nulos
+            $table->unsignedBigInteger('group_id')->nullable();
 
-            $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            
+            // Eliminar la restricción de clave foránea (foreign key constraint)
+            // $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            // Si deseas mantener la relación, puedes dejarla así y definir grupos en la base de datos
+
             $table->timestamps();
         });
     }
